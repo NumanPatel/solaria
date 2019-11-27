@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Solaria Panels</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <style>
+      html, body {
+      min-height: 100%;
+      }
+      body, div, form, input, select { 
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 14px;
+      color: #666;
+      line-height: 22px;
+      }
+      .conatiner{
+        margin: 3% 18%;
+      }
+      h1, h4 {
+      margin: 15px 0 4px;
+      }
+      h4 {
+      margin: 20px 0 4px;
+      font-weight: 400;
+      }
+      .fwb{
+        font-weight: bold;
+      }
+      .fwn{
+        font-weight: normal;
+      }
+      .small {
+      font-size: 10px;
+      line-height: 18px;
+      }
+      form {
+      width: 100%;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 2px 5px #ccc; 
+      }
+      input {
+      width: calc(100% - 10px);
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      vertical-align: middle;
+      }
+      .title-block select, .title-block input {
+      margin-bottom: 10px;
+      }
+      select , input[type='text']{
+      padding: 7px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+      background: transparent;
+      line-height: 12px;
+      }
+      select, table {
+      width: 100%;
+      }
+      option {
+      background: #fff;
+      }
+     
+      .green-text{
+        color: #71bf44;
+      }
+      .col{
+        width:29%;
+        padding: 0px 15px;
+        display: inline-block;
+      }
+      button.cal-btn {
+        border: none;
+        background: #71bf44;
+        color: #fff;
+        padding: 8px 33px;
+        font-size: 17px;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="testbox conatiner">
+      <!-- <form action="/"  onsubmit="return calci()"> -->
+        <h1 class="green-text fwn">How Many Solaria Panels Does It Take To Charge Your Car?</h1>
+        <br>
+        <h2 class="fwn">Tell us about your car:</h2>
+        <div>
+        <div class="col">
+             <h4>How many miles do you drive a year?</h4>
+              <input type="text" value="12000" max="100000000" min="0" required="required" id="annual_miles">
+        </div>
+        </div>
+
+
+        <div>
+        <div class="col">
+             <h4>What is the make of your car?</h4>
+              <select id="car" onchange="ChangeCarList()" required="required">
+                <option value="Don’t know">Don’t know</option>
+                <option value="Hyundai">Hyundai</option> 
+                <option value="Tesla">Tesla</option> 
+                <option value="Toyota">Toyota</option> 
+                <option value="Chevrolet">Chevrolet</option> 
+                <option value="Volkswagen">Volkswagen</option> 
+                <option value="Honda">Honda</option> 
+                <option value="Kia">Kia</option> 
+                <option value="BMW">BMW</option> 
+                <option value="Fiat">Fiat</option> 
+                <option value="Nissan">Nissan</option> 
+                <option value="smart">smart</option> 
+              </select>
+        </div>
+     
+        <div class="col">
+             <h4 > Model?</h4>
+              <select id="carmodel" >
+              </select>
+        </div>
+
+        <div class="col">
+            <h4>Year?</h4>
+              <select required="required">
+                <option value="Don’t know">Don’t know</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+              </select>
+        </div>
+        </div>
+
+        <div>
+          
+          <br>
+          <h2 class="fwn">Tell us about your potential solar system:</h2>
+
+        
+        <div class="col">
+             <h4>Enter system address</h4>
+              <input type="text" id="address" required="required">
+        </div>
+     
+        <div class="col">
+             <h4>What model of Solaria Panels will you be using?</h4>
+              <select id="system_capacity" required="required">
+                <option value="0.360">360-R-PD</option>
+                <option value="0.355">355-R-AC</option>
+                <option value="0.365">365-R-AC</option>
+                <option value="0.370" selected="selected">370-R-PD</option>
+                <option value="0.430">430-C-PD</option>
+                <option value="0.440">440-C-PD</option>
+              </select>
+        </div>
+
+        <div class="col">
+            
+        </div>
+        </div>
+
+
+        <div>
+        
+        <div class="col">
+             <h4>What is the slope of your system?</h4>
+              <select id="tilt" required="required">
+                <option value="20" disabled selected style="display: none;">20</option>
+              </select>
+        </div>
+     
+        <div class="col">
+             <h4>What is the azimuth of your system?</h4>
+              <select id="azimuth" required="required">
+                <option value="180" disabled selected style="display: none;">180</option>
+              </select>
+        </div>
+
+        <div class="col">
+            <button class="cal-btn" type="button" onclick="calci();">Calculate</button>
+        </div>
+        </div>
+
+       <h2 class="fwn">Results</h2>
+        <p class="green-text" id="out-results">You only need <span class="fwb">6</span> Solaria Panels <span class="fwb">(360W)</span> to offset <span class="fwb">100%</span> of your EV charging needs.</p>
+      <!-- </form> -->
+    </div>
+
+  </body>
+  <script type="text/javascript">
+
+
+    var carsAndModels = {};
+        carsAndModels['Hyundai'] = ['Ioniq Electric', 'Kona Electric', 'Ioniq Plug-in Hybrid', 'Model 3 Long Range AWD' , 'Model 3 Long Range AWD Performance'];
+        carsAndModels['Tesla'] = ['Model 3 Standard Range Plus', 'Model 3 Standard Range', 'Model 3 Long Range' , 'Model S Long Range' , 'Model S Standard Range'];
+        carsAndModels['Toyota'] = ['Prius Prime', 'Polo', 'Scirocco', 'Touareg'];
+        carsAndModels['Chevrolet'] = ['Bolt EV', 'Volt'];
+        carsAndModels['Volkswagen'] = ['e-Golf'];
+        carsAndModels['Honda'] = ['Clarity', 'Clarity PHEV', 'Z3'];
+        carsAndModels['Kia'] = ['Soul', 'Niro Electric', 'Niro Plug-in Hybrid'];
+        carsAndModels['BMW'] = ['i3', 'i3s', 'i3s with Range Extender'];
+        carsAndModels['Fiat'] = ['500e'];
+        carsAndModels['Nissan'] = ['Leaf (40 kWh battery pack)', 'Leaf (62 kWh battery pack)'];
+        carsAndModels['smart'] = ['EQ fortwo coupe'];
+
+        function ChangeCarList() {
+          var carList = document.getElementById("car");
+          var modelList = document.getElementById("carmodel");
+          var selCar = carList.options[carList.selectedIndex].value;
+          while (modelList.options.length) {
+            modelList.remove(0);
+          }
+          var cars = carsAndModels[selCar];
+          if (cars) {
+            var i;
+            for (i = 0; i < cars.length; i++) {
+              var abc = new Option(cars[i]);
+              var car = abc.value = abc;
+              modelList.options.add(car);
+            }
+          }
+        } 
+
+        azimuth = document.getElementById( 'azimuth' );
+        tilt = document.getElementById( 'tilt' );
+        var azimuth, tilt, option;
+        for (var i = 0; i < 400 ; i++) {
+            option = document.createElement( 'option' );
+            option.value = option.text = i;
+            azimuth.add( option );
+        }
+
+        for (var i = 0; i < 100 ; i++) {
+            option = document.createElement( 'option' );
+            option.value = option.text = i;
+            tilt.add( option );
+        }
+
+    
+             
+          function calci() {
+            var address = document.getElementById('address').value;            
+              var system_capacity = document.getElementById('system_capacity').value;
+              var annual_miles = document.getElementById('annual_miles').value;
+              var fuel_economy = 133;
+              var tilt = document.getElementById('tilt').value;
+              var azimuth = document.getElementById('azimuth').value;
+              // alert(address);
+            var request = {
+                              address: address ,
+                              tilt : tilt ,
+                              azimuth : azimuth ,
+                              system_capacity : system_capacity ,
+                              fuel_economy : fuel_economy ,
+                              annual_miles : annual_miles
+                            }
+
+             calculate(request);             
+              return false;
+          }
+
+
+        function calculate(request) {
+          address = request.address;
+          system_capacity = request.system_capacity;
+          annual_miles = parseFloat(request.annual_miles);
+          fuel_economy = parseFloat(request.fuel_economy);
+          tilt = request.tilt;
+          azimuth = request.azimuth;
+            //api_key is required to send requests to NREL DB.
+            var api_key='gFRbxTBidvcMJTC4p6OvBEu4ztpH9qmM7dd3H4a9'
+            //losses to be assumed as 14
+            var losses=14
+            //module_type to be assumed as premium(1)
+            var module_type=1
+            //array_type to be assumed as 1(fixed - roof mounted)
+            var array_type=1
+
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function() { 
+                if (xmlHttp.readyState === 4 && xmlHttp.status === 200){
+                    //this this the number of panels that is being returned
+                    let obj = JSON.parse(this.responseText);       
+                    let result = Math.ceil(annual_miles*33.7/fuel_economy/parseFloat(obj.outputs.ac_annual));
+                    let result1 = Math.ceil(result * parseFloat(obj.outputs.ac_annual));
+                    let respText = 'You only need <span class="fwb">'+result+'</span> Solaria Panels <span class="fwb">('+result1+'W)</span> to offset <span class="fwb">100%</span> of your EV charging needs.</p>';
+                    document.getElementById('out-results').innerHTML = respText;                                  
+                    // return result;
+                } else {
+                    //write error handling here
+                }
+            }
+           xmlHttp.open("GET", `https://developer.nrel.gov/api/pvwatts/v6.json?address=${address}&array_type=${array_type}&tilt=${tilt}&azimuth=${azimuth}&losses=${losses}&module_type=${module_type}&system_capacity=${system_capacity}&api_key=${api_key}` , true); // true for asynchronous 
+            xmlHttp.send(null);
+
+            // console.log(`https://developer.nrel.gov/api/pvwatts/v6.json?address=${address}&array_type=${array_type}&tilt=${tilt}&azimuth=${azimuth}&losses=${losses}&module_type=${module_type}&system_capacity=${system_capacity}&api_key=${api_key}`);
+        }
+
+       
+  </script>
+</html>
